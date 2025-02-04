@@ -1,5 +1,5 @@
-name: 'iOS Resign'
-description: 'Resign iOS ipa'
+name: 'iOS Resign with entitlements'
+description: 'Resign iOS ipa (with additional entitlements)'
 branding:
   icon: 'activity'
   color: 'white'
