@@ -19,6 +19,9 @@ inputs:
   signing_identity:
     description: "iOS Signing identity"
     required: true
+  entitlements:
+    description: "Entitlements to include in the ipa"
+    required: true
 runs:
   using: "composite"
   steps:
@@ -29,4 +32,5 @@ runs:
           CERT_P12: ${{ inputs.cert_p12 }}
           P12_PASS: ${{ inputs.p12_pass }}
           SIGNING_IDENTITY: ${{ inputs.signing_identity }}
+          ENTITLEMENTS: ${{ inputs.entitlements }}
       shell: bash
