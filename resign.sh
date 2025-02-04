@@ -18,7 +18,17 @@ security unlock-keychain -p "$KEYCHAIN_PASS" "$KEYCHAIN_PATH"
 security import cicert.p12 -P "$P12_PASS" -A -t cert -f pkcs12 -k "$KEYCHAIN_PATH"
 security list-keychain -d user -s "$KEYCHAIN_PATH"
 
-fastlane sigh resign "$IPA_PATH" --keychain_path "$KEYCHAIN_PATH" --signing_identity "$SIGNING_IDENTITY" --provisioning_profile "CI.mobileprovision" --entitlements "$ENTITLEMENTS"
+# Print the content of entitlements if it's not empty
+if [ -n "$ENTITLEMENTS" ]; then
+    echo "Entitlements content:"
+    cat "$ENTITLEMENTS"
+    ENTITLEMENTS_OPTION="--entitlements \"$ENTITLEMENTS\""
+else
+    ENTITLEMENTS_OPTION=""
+fi
+
+# Run fastlane sigh resign
+fastlane sigh resign "$IPA_PATH" --keychain_path "$KEYCHAIN_PATH" --signing_identity "$SIGNING_IDENTITY" --provisioning_profile "CI.mobileprovision" $ENTITLEMENTS_OPTION
 
 # Clean up
 rm ~/Library/MobileDevice/Provisioning\ Profiles/CI.mobileprovision
