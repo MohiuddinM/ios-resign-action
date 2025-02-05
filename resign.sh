@@ -18,11 +18,10 @@ security unlock-keychain -p "$KEYCHAIN_PASS" "$KEYCHAIN_PATH"
 security import cicert.p12 -P "$P12_PASS" -A -t cert -f pkcs12 -k "$KEYCHAIN_PATH"
 security list-keychain -d user -s "$KEYCHAIN_PATH"
 
-# Print the content of entitlements if it's not empty
+ENTITLEMENTS_PATH="Runner.entitlements"
 if [ -n "$ENTITLEMENTS" ]; then
-    echo "Entitlements content:"
-    cat "$ENTITLEMENTS"
-    ENTITLEMENTS_OPTION="--entitlements \"$ENTITLEMENTS\""
+    echo "$ENTITLEMENTS" > "$ENTITLEMENTS_PATH"
+    ENTITLEMENTS_OPTION="--entitlements \"$ENTITLEMENTS_PATH\""
 else
     ENTITLEMENTS_OPTION=""
 fi
