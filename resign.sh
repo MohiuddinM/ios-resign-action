@@ -21,7 +21,7 @@ security list-keychain -d user -s "$KEYCHAIN_PATH"
 ENTITLEMENTS_PATH="Runner.entitlements"
 if [ -n "$ENTITLEMENTS" ]; then
     echo "$ENTITLEMENTS" | base64 --decode > "$ENTITLEMENTS_PATH"
-    ENTITLEMENTS_OPTION="--entitlements \"$ENTITLEMENTS_PATH\""
+    ENTITLEMENTS_OPTION="--entitlements $ENTITLEMENTS_PATH"
 else
     ENTITLEMENTS_OPTION=""
 fi
