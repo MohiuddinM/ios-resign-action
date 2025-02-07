@@ -17,13 +17,14 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: bradyjoslin/ios-resign-action@v1
+      - uses: MohiuddinM/ios-resign-action@v1
         with:
           ipa_path: ./sample.ipa
           mobileprovision: ${{ secrets.MOBILEPROVISION }}
           cert_p12: ${{ secrets.CERT_P12 }}
           p12_pass: ${{ secrets.P12_PASS }}
           signing_identity: ${{ secrets.SIGNING_IDENTITY }}
+          entitlements: ${{ env.ENTITLEMENTS_BASE64}}
       - uses: actions/upload-artifact@v2
         with:
           name: ipa
@@ -39,6 +40,8 @@ jobs:
 | cert_p12         | Base64 representation p12 distribution cert                      | Y         |
 | p12_pass         | Password used when exporting p12 distribution cert from keychain | Y         |
 | signing_identity | iOS Signing Identity                                             | Y         |
+| enttilements     | Entitlements to add                                              | N         |
+
 
 ## FAQ
 
